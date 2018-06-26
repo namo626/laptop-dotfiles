@@ -1,0 +1,9 @@
+*
+!.gitignore
+!.xmonad/
+!.xinitrc
+!.compton.conf
+!.stalonetrayrc
+!xmobar.config
+
+
