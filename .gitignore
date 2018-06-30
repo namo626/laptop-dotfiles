@@ -7,5 +7,6 @@
 !xmobar.config
 !.xbindkeysrc
 !.bashrc
+!.emacs.d/init.el
 
 

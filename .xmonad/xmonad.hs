@@ -83,7 +83,6 @@ terminalLayout =
 
 codingLayout =
   renamed [Replace "Coding"] $
-  mySpacing $
   twoPaneTabbed |||
   twoPaneTall |||
   simpleTall 53
@@ -121,7 +120,10 @@ addSub l =
 
 twoPaneTabbed =
   windowNavigation $
-  combineTwoP (TwoPane 0.03 0.53) (Full) (tabbed shrinkText def) (ClassName "Firefox-esr" `Or` ClassName "qpdfview")
+  combineTwoP (mySpacing $ TwoPane 0.03 0.53) 
+	      (Full) 
+ 	      (tabbed shrinkText def) 
+	      (ClassName "Firefox-esr" `Or` ClassName "qpdfview")
 
 twoPaneTall =
   windowNavigation $

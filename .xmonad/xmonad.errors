@@ -7,17 +7,17 @@ xmonad.hs:38:128: warning: [-Wdeprecations]
 38 |   xmonad =<< statusBar "xmobar ~/xmobar.config" xmobarPP toggleStrutsKey (withNavigation2DConfig def {defaultTiledNavigation = hybridNavigation} $ ewmh myConfig)
    |                                                                                                                                ^^^^^^^^^^^^^^^^
 
-xmonad.hs:159:1: warning: [-Wtabs]
-    Tab character found here, and in three further locations.
+xmonad.hs:124:1: warning: [-Wtabs]
+    Tab character found here, and in six further locations.
     Please use spaces instead.
     |
-159 |         [ ((altMask, xK_l), windowGo R False)
+124 |               (Full) 
     | ^^^^^^^^
 
-xmonad.hs:163:39: warning: [-Wdeprecations]
+xmonad.hs:165:39: warning: [-Wdeprecations]
     In the use of ‘defaultGSConfig’
     (imported from XMonad.Actions.GridSelect):
     Deprecated: "Use def (from Data.Default, and re-exported from XMonad.Actions.GridSelect) instead."
     |
-163 |         , ((modm, xK_u), goToSelected defaultGSConfig)
+165 |         , ((modm, xK_u), goToSelected defaultGSConfig)
     |                                       ^^^^^^^^^^^^^^^
