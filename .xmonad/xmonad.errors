@@ -1,9 +1,23 @@
 
-xmonad.hs:136:1: warning: [-Wtabs]
+xmonad.hs:38:128: warning: [-Wdeprecations]
+    In the use of ‘hybridNavigation’
+    (imported from XMonad.Actions.Navigation2D):
+    Deprecated: "Use hybridOf with lineNavigation and centerNavigation as arguments."
+   |
+38 |   xmonad =<< statusBar "xmobar ~/xmobar.config" xmobarPP toggleStrutsKey (withNavigation2DConfig def {defaultTiledNavigation = hybridNavigation} $ ewmh myConfig)
+   |                                                                                                                                ^^^^^^^^^^^^^^^^
+
+xmonad.hs:159:1: warning: [-Wtabs]
     Tab character found here, and in three further locations.
     Please use spaces instead.
+    |
+159 |         [ ((altMask, xK_l), windowGo R False)
+    | ^^^^^^^^
 
-xmonad.hs:140:39: warning: [-Wdeprecations]
+xmonad.hs:163:39: warning: [-Wdeprecations]
     In the use of ‘defaultGSConfig’
     (imported from XMonad.Actions.GridSelect):
     Deprecated: "Use def (from Data.Default, and re-exported from XMonad.Actions.GridSelect) instead."
+    |
+163 |         , ((modm, xK_u), goToSelected defaultGSConfig)
+    |                                       ^^^^^^^^^^^^^^^

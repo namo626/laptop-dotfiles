@@ -3,10 +3,12 @@
 import XMonad
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
+import XMonad.Layout.Renamed
 import XMonad.Actions.Navigation2D
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.TwoPane
+import XMonad.Layout.Spacing
 import XMonad.Layout.Grid
 import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.ComboP
@@ -26,24 +28,32 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.GridSelect
 import XMonad.Actions.WindowBringer
 import XMonad.Prompt.Window
+import XMonad.Hooks.EwmhDesktops (ewmh)
+import XMonad.Layout.Fullscreen
+import XMonad.Util.NamedScratchpad
 
 
 main = do
   xmproc <- spawnPipe "~/.local/bin/xmobar ~/xmobar.config"
-  xmonad $ withNavigation2DConfig def $ myConfig xmproc
+  xmonad =<< statusBar "xmobar ~/xmobar.config" xmobarPP toggleStrutsKey (withNavigation2DConfig def {defaultTiledNavigation = hybridNavigation} $ ewmh myConfig)
 
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
-myConfig p = def
+myPP = namedScratchpadFilterOutWorkspacePP
+     $ xmobarPP { ppOrder = \(ws:l:t:_) -> [ws, t]
+                , ppCurrent = xmobarColor "yellow" "green" . wrap "" ""
+, ppTitle = xmobarColor "green" "" . shorten 30}
+
+myConfig = def
   { terminal = "terminator"
   , modMask = mod4Mask
   , keys = myKeys <+> keys def
   , layoutHook = avoidStruts $ toggleLayouts Full $ myLayouts
-  , logHook = dynamicLogWithPP $ xmobarPP { ppOutput = hPutStrLn p }
-  , handleEventHook = handleEventHook def <+> docksEventHook
+  -- , logHook = dynamicLogWithPP $ xmobarPP { ppOutput = hPutStrLn p }
+  , handleEventHook = handleEventHook def <+> docksEventHook <+> fullscreenEventHook
   , borderWidth = 4
   , focusedBorderColor = solBlue
-  , manageHook = manageDocks <+> myManageHook <+> manageHook def
+  , manageHook = fullscreenManageHook <+> manageDocks <+> myManageHook <+> manageHook def
   }
 
 -- layouts
@@ -57,28 +67,40 @@ myLayouts =
   $ onWorkspace "6" codingLayout
   $ readingLayout
 
+mySpacing = spacingWithEdge 7
+
 confLayout =
-  addSub
+  renamed [Replace "Conf"] 
+  $ addSub
   $ simpleTall 56 ||| simpleThree 46
 
 terminalLayout =
+  renamed [Replace "Terminals"] $
+  mySpacing $
   simpleTall 50 |||
   simpleThree 40 |||
   (Mirror $ simpleTall 60)
 
 codingLayout =
+  renamed [Replace "Coding"] $
+  mySpacing $
   twoPaneTabbed |||
   twoPaneTall |||
   simpleTall 53
 
 matlabLayout =
-  addSub
+  renamed [Replace "MATLAB"]
+  $ addSub
   $ simpleTall 50 ||| simpleThree 40
 
 mediaLayout =
+  renamed [Replace "Media"] $
+  mySpacing $
   Grid ||| simpleThree 50 ||| (Mirror $ simpleThree 50)
 
 readingLayout =
+  renamed [Replace "Reading"] $
+  mySpacing $
   simpleTwo 50 ||| simpleThree 50
 
 -- twoPaneFlex =
@@ -89,8 +111,9 @@ readingLayout =
 {- Base modifiers -}
 --addSub :: (LayoutClass l a) => l a -> ModifiedLayout m l a
 addSub l =
-  windowNavigation
+  configurableNavigation noNavigateBorders
   $ addTabs shrinkText def
+  $ mySpacing
   $ subLayout [] Simplest
   $ l
 
