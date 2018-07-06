@@ -53,26 +53,31 @@ myConfig = def
   , handleEventHook = handleEventHook def <+> docksEventHook <+> fullscreenEventHook
   , borderWidth = 4
   , focusedBorderColor = solBlue
+  , normalBorderColor = darkBlue
   , manageHook = fullscreenManageHook <+> manageDocks <+> myManageHook <+> manageHook def
+  , XMonad.workspaces = myWorkspaces
   }
 
+myWorkspaces = [ "conf", "term", "docs", "matlab", "media", "prog1", "prog2", "misc", "web" ]
 -- layouts
 -- SUBLAYOUT IS THE CAUSE OF FLOAT FOCUS LOST!!!
 myLayouts =
-  onWorkspace "1" confLayout
-  $ onWorkspace "2" terminalLayout
-  $ onWorkspace "3" codingLayout
-  $ onWorkspace "4" matlabLayout
-  $ onWorkspace "5" mediaLayout
-  $ onWorkspace "6" codingLayout
+  onWorkspace "conf" confLayout
+  $ onWorkspace "term" terminalLayout
+  $ onWorkspace "docs" readingLayout
+  $ onWorkspace "matlab" matlabLayout
+  $ onWorkspace "media" mediaLayout
+  $ onWorkspace "prog1" codingLayout
+  $ onWorkspace "prog2" codingLayout
+  $ onWorkspace "web" readingLayout
   $ readingLayout
 
 mySpacing = spacingWithEdge 7
 
 confLayout =
-  renamed [Replace "Conf"] 
+  renamed [Replace "Conf"]
   $ addSub
-  $ simpleTall 56 ||| simpleThree 46
+  $ simpleTall 53 ||| simpleThree 46
 
 terminalLayout =
   renamed [Replace "Terminals"] $
@@ -85,7 +90,7 @@ codingLayout =
   renamed [Replace "Coding"] $
   twoPaneTabbed |||
   twoPaneTall |||
-  simpleTall 53
+  simpleTall 50
 
 matlabLayout =
   renamed [Replace "MATLAB"]
@@ -120,14 +125,14 @@ addSub l =
 
 twoPaneTabbed =
   windowNavigation $
-  combineTwoP (mySpacing $ TwoPane 0.03 0.53) 
-	      (Full) 
- 	      (tabbed shrinkText def) 
+  combineTwoP (mySpacing $ TwoPane 0.03 0.50)
+	      (Full)
+ 	      (tabbed shrinkText def)
 	      (ClassName "Firefox-esr" `Or` ClassName "qpdfview")
 
 twoPaneTall =
   windowNavigation $
-  combineTwoP (TwoPane 0.03 0.53) (Full) (Mirror $ simpleThree 60) (ClassName "Firefox-esr" `Or` ClassName "qpdfview")
+  combineTwoP (TwoPane 0.03 0.50) (Full) (Mirror $ simpleThree 60) (ClassName "Firefox-esr" `Or` ClassName "qpdfview")
 
 --simpleTall :: Rational -> ResizableTall a
 simpleTall n = ResizableTall 1 (3/100) (n/100) []
@@ -142,6 +147,7 @@ simpleTwo n = TwoPane (3/100) (n/100)
 
 -- named colors
 solBlue = "#268bd2"
+darkBlue = "#073642"
 
 --manage hooks
 myManageHook = composeOne
@@ -162,12 +168,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
  	, ((altMask, xK_j), windowGo D False)
  	, ((altMask, xK_k), windowGo U False)
  	, ((altMask, xK_h), windowGo L False)
-        , ((modm, xK_u), goToSelected defaultGSConfig)
+        , ((modm, xK_u), goToSelected def)
         --, ((modm, xK_o), windowPrompt def Goto wsWindows)
 
         -- launching apps
         , ((modm, xK_e), spawn "emacsclient -c")
-        , ((modm .|. altMask, xK_l), spawn "xscreensaver-command -lock")
+        , ((modm .|. altMask, xK_l), spawn "slock")
 
         -- resizing tall
         , ((modm, xK_a), sendMessage MirrorShrink)

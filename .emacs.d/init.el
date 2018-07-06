@@ -25,7 +25,7 @@
  '(custom-safe-themes
    (quote
     ("8cb818e0658f6cc59928a8f2b2917adc36d882267bf816994e00c5b8fcbf6933" "190a9882bef28d7e944aa610aa68fe1ee34ecea6127239178c7ac848754992df" "a914fce8ef585e826ea136da5478bc929a3a42161cd478e4f4ff6df00d8da1c3" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" "5e52ce58f51827619d27131be3e3936593c9c7f9f9f9d6b33227be6331bf9881" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "7f3ef7724515515443f961ef87fee655750512473b1f5bf890e2dc7e065f240c" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "125fd2180e880802ae98b85f282b17f0aa8fa6cb9fc4f33d7fb19a38c40acef0" "dc9a8d70c4f94a28aafc7833f8d05667601968e6c9bf998791c39fcb3e4679c9" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "bcc6775934c9adf5f3bd1f428326ce0dcd34d743a92df48c128e6438b815b44f" "cdfc5c44f19211cfff5994221078d7d5549eeb9feda4f595a2fd8ca40467776c" default)))
- '(elpy-rpc-python-command "/var/namo/anaconda2/bin/python")
+ '(elpy-rpc-python-command "/home/namo/anaconda2/bin/python")
  '(fci-rule-color "#073642")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(frame-background-mode (quote dark))
@@ -80,11 +80,11 @@
  '(org-tags-column 90)
  '(package-selected-packages
    (quote
-    (vimish-fold plan9-theme ein company-auctex auto-complete-auctex sunburn-theme apropospriate-theme auto-complete matlab-mode elpy sicp racket-mode auctex slime intero magit company-ghc hindent ghc haskell-mode pdf-tools color-theme-sanityinc-tomorrow gruvbox-theme color-theme-sanityinc-solarized hc-zenburn-theme zenburn-theme linum-relative org-edna)))
+    (solarized-theme vimish-fold plan9-theme ein company-auctex auto-complete-auctex sunburn-theme apropospriate-theme auto-complete matlab-mode elpy sicp racket-mode auctex slime intero magit company-ghc hindent ghc haskell-mode pdf-tools color-theme-sanityinc-tomorrow gruvbox-theme color-theme-sanityinc-solarized hc-zenburn-theme zenburn-theme linum-relative org-edna)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
- '(python-shell-interpreter "/var/namo/anaconda2/bin/ipython")
+ '(python-shell-interpreter "/home/namo/anaconda2/bin/ipython")
  '(python-shell-interpreter-args "--simple-prompt")
  '(server-mode t)
  '(show-paren-mode t)
@@ -332,13 +332,6 @@
 ;;  "convert stuff to unicode"
 ;;  (setq prettify-symbols-alist '(("lambda" . 955))))
 ;;(add-hook 'racket-mode-hook #'racket-unicode-input-method-enable)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#3F3F3F" :foreground "#DCDCCC" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "CYRE" :family "Inconsolata")))))
-
 ;; resize split
 (defun halve-other-window-height ()
   "Expand current window to use half of the other window's lines."
@@ -352,3 +345,42 @@
 
 (global-set-key (kbd "<f7>") 'halve-other-window-height)
 (global-set-key (kbd "<f6>") 'halve-current-window-height)
+
+
+;; solarized
+(setq solarized-distinct-fringe-background t)
+
+;; Don't change the font for some headings and titles
+(setq solarized-use-variable-pitch nil)
+
+;; make the modeline high contrast
+(setq solarized-high-contrast-mode-line t)
+
+;; Use less bolding
+(setq solarized-use-less-bold t)
+
+;; Use more italics
+(setq solarized-use-more-italic t)
+
+;; Use less colors for indicators such as git:gutter, flycheck and similar
+(setq solarized-emphasize-indicators nil)
+
+;; Don't change size of org-mode headlines (but keep other size-changes)
+(setq solarized-scale-org-headlines nil)
+
+;; Avoid all font-size changes
+(setq solarized-height-minus-1 1.0)
+(setq solarized-height-plus-1 1.0)
+(setq solarized-height-plus-2 1.0)
+(setq solarized-height-plus-3 1.0)
+(setq solarized-height-plus-4 1.0)
+
+(load-theme 'solarized-light t)
+
+;; Fonts
+(set-face-attribute 'default nil :font "Input Mono-12.5")
+
+(global-auto-revert-mode t)
+
+;; (setq python-shell-interpreter "ipython"
+      ;; python-shell-interpreter-args "-i --simple-prompt")
