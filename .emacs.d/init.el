@@ -80,12 +80,11 @@
  '(org-tags-column 90)
  '(package-selected-packages
    (quote
-    (solarized-theme vimish-fold plan9-theme ein company-auctex auto-complete-auctex sunburn-theme apropospriate-theme auto-complete matlab-mode elpy sicp racket-mode auctex slime intero magit company-ghc hindent ghc haskell-mode pdf-tools color-theme-sanityinc-tomorrow gruvbox-theme color-theme-sanityinc-solarized hc-zenburn-theme zenburn-theme linum-relative org-edna)))
+    (company-jedi company-anaconda anaconda-mode solarized-theme vimish-fold plan9-theme ein company-auctex auto-complete-auctex sunburn-theme apropospriate-theme auto-complete matlab-mode elpy sicp racket-mode auctex slime intero magit company-ghc hindent ghc haskell-mode pdf-tools color-theme-sanityinc-tomorrow gruvbox-theme color-theme-sanityinc-solarized hc-zenburn-theme zenburn-theme linum-relative org-edna)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(python-shell-interpreter "/home/namo/anaconda2/bin/ipython")
- '(python-shell-interpreter-args "--simple-prompt")
  '(server-mode t)
  '(show-paren-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#839496" 0.2))
@@ -325,7 +324,11 @@
             (auto-complete-mode 1)))
 
 ;; python
-(elpy-enable)
+
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "-i")
+
+
 
 ;;prettifier
 ;;(defun my-add-pretty-lambda ()
@@ -378,9 +381,12 @@
 (load-theme 'solarized-light t)
 
 ;; Fonts
-(set-face-attribute 'default nil :font "Input Mono-12.5")
+(set-face-attribute 'default nil :font "Source Code Pro for Powerline-13")
 
 (global-auto-revert-mode t)
-
-;; (setq python-shell-interpreter "ipython"
-      ;; python-shell-interpreter-args "-i --simple-prompt")
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
