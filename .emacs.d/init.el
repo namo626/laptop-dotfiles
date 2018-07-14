@@ -208,6 +208,7 @@
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "<f9>") (kbd "C-u - 3 C-x ^"))
 (global-set-key (kbd "<f8>") (kbd "C-- - 3 C-x ^"))
+(global-set-key (kbd "M-g") 'magit-status)
 
 ;;global settings
 (add-hook 'before-save-hook 'delete-trailing-whitespace)

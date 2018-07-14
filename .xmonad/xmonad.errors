@@ -1,15 +1,15 @@
 
-xmonad.hs:38:128: warning: [-Wdeprecations]
+xmonad.hs:38:124: warning: [-Wdeprecations]
     In the use of ‘hybridNavigation’
     (imported from XMonad.Actions.Navigation2D):
     Deprecated: "Use hybridOf with lineNavigation and centerNavigation as arguments."
    |
-38 |   xmonad =<< statusBar "xmobar ~/xmobar.config" xmobarPP toggleStrutsKey (withNavigation2DConfig def {defaultTiledNavigation = hybridNavigation} $ ewmh myConfig)
-   |                                                                                                                                ^^^^^^^^^^^^^^^^
+38 |   xmonad =<< statusBar "xmobar ~/xmobar.config" myPP toggleStrutsKey (withNavigation2DConfig def {defaultTiledNavigation = hybridNavigation} $ ewmh myConfig)
+   |                                                                                                                            ^^^^^^^^^^^^^^^^
 
-xmonad.hs:129:1: warning: [-Wtabs]
-    Tab character found here, and in six further locations.
+xmonad.hs:45:1: warning: [-Wtabs]
+    Tab character found here, and in 8 further locations.
     Please use spaces instead.
-    |
-129 |               (Full)
-    | ^^^^^^^^
+   |
+45 |                 , ppTitle = xmobarColor "green" "" . shorten 30}
+   | ^^^^^^^^

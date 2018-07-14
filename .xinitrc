@@ -8,9 +8,9 @@ udiskie --tray &
 #dropbox start &
 ~/.dropbox-dist/dropboxd &
 megasync &
-# nm-applet &
 stalonetray &
 xss-lock -- slock &
-feh --bg-scale ~/Pictures/sky.png &
+feh --bg-scale ~/Pictures/sky.jpg &
+xset b off &
 
 exec xmonad

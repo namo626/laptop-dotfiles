@@ -35,14 +35,14 @@ import XMonad.Util.NamedScratchpad
 
 main = do
   xmproc <- spawnPipe "~/.local/bin/xmobar ~/xmobar.config"
-  xmonad =<< statusBar "xmobar ~/xmobar.config" xmobarPP toggleStrutsKey (withNavigation2DConfig def {defaultTiledNavigation = hybridNavigation} $ ewmh myConfig)
+  xmonad =<< statusBar "xmobar ~/xmobar.config" myPP toggleStrutsKey (withNavigation2DConfig def {defaultTiledNavigation = hybridNavigation} $ ewmh myConfig)
 
 toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 myPP = namedScratchpadFilterOutWorkspacePP
-     $ xmobarPP { ppOrder = \(ws:l:t:_) -> [ws, t]
+     $ xmobarPP { ppOrder = \(ws:l:t:_) -> [ws, l]
                 , ppCurrent = xmobarColor "yellow" "green" . wrap "" ""
-, ppTitle = xmobarColor "green" "" . shorten 30}
+		, ppTitle = xmobarColor "green" "" . shorten 30}
 
 myConfig = def
   { terminal = "terminator"
@@ -51,7 +51,7 @@ myConfig = def
   , layoutHook = avoidStruts $ toggleLayouts Full $ myLayouts
   -- , logHook = dynamicLogWithPP $ xmobarPP { ppOutput = hPutStrLn p }
   , handleEventHook = handleEventHook def <+> docksEventHook <+> fullscreenEventHook
-  , borderWidth = 4
+  , borderWidth = 3
   , focusedBorderColor = solBlue
   , normalBorderColor = darkBlue
   , manageHook = fullscreenManageHook <+> manageDocks <+> myManageHook <+> manageHook def
@@ -72,7 +72,7 @@ myLayouts =
   $ onWorkspace "web" readingLayout
   $ readingLayout
 
-mySpacing = spacingWithEdge 7
+mySpacing = spacingWithEdge 9
 
 confLayout =
   renamed [Replace "Conf"]
@@ -124,7 +124,7 @@ addSub l =
 {- Base layouts to be combined -}
 
 twoPaneTabbed =
-  windowNavigation $
+  configurableNavigation noNavigateBorders $
   combineTwoP (mySpacing $ TwoPane 0.03 0.50)
 	      (Full)
  	      (tabbed shrinkText def)
