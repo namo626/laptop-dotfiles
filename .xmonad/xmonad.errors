@@ -8,7 +8,7 @@ xmonad.hs:38:124: warning: [-Wdeprecations]
    |                                                                                                                            ^^^^^^^^^^^^^^^^
 
 xmonad.hs:45:1: warning: [-Wtabs]
-    Tab character found here, and in 8 further locations.
+    Tab character found here, and in 10 further locations.
     Please use spaces instead.
    |
 45 |                 , ppTitle = xmobarColor "green" "" . shorten 30}

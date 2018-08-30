@@ -69,6 +69,7 @@ myLayouts =
   $ onWorkspace "media" mediaLayout
   $ onWorkspace "prog1" codingLayout
   $ onWorkspace "prog2" codingLayout
+  $ onWorkspace "misc" panelLayout
   $ onWorkspace "web" readingLayout
   $ readingLayout
 
@@ -83,8 +84,8 @@ terminalLayout =
   renamed [Replace "Terminals"] $
   mySpacing $
   simpleTall 50 |||
-  simpleThree 40 |||
-  (Mirror $ simpleTall 60)
+  simpleThree 33 |||
+  (Mirror $ simpleTall 53)
 
 codingLayout =
   renamed [Replace "Coding"] $
@@ -100,12 +101,19 @@ matlabLayout =
 mediaLayout =
   renamed [Replace "Media"] $
   mySpacing $
-  Grid ||| simpleThree 50 ||| (Mirror $ simpleThree 50)
+  simpleTwo 40 ||| 
+  Grid ||| 
+  simpleThree 33 
 
 readingLayout =
   renamed [Replace "Reading"] $
   mySpacing $
   simpleTwo 50 ||| simpleThree 50
+
+panelLayout =
+  renamed [Replace "Control"] $
+  mySpacing $
+  Grid ||| (Mirror $ simpleTall 50) ||| simpleThree 33
 
 -- twoPaneFlex =
 --   windowNavigation
@@ -155,8 +163,8 @@ myManageHook = composeOne
                , isDialog -?> insertPosition Above Newer <+> doCenterFloat
                , className =? "Eog" -?> insertPosition Below Older
                , className =? "MATLAB R2017b - academic use" -?> insertPosition Below Older
-               -- , className =? "Thunar" -?> doCenterFloat
                , className =? "matplotlib" -?> insertPosition Below Older
+	       , className =? "terminator" -?> insertPosition Below Newer
                , return True -?> insertPosition Below Newer]
 
   where name = stringProperty "WM_NAME"
@@ -173,7 +181,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList
 
         -- launching apps
         , ((modm, xK_e), spawn "emacsclient -c")
+        , ((modm, xK_o), spawn "gnome-calculator")
+        , ((modm, xK_apostrophe), spawn "qpdfview")
         , ((modm .|. altMask, xK_l), spawn "slock")
+        , ((modm .|. altMask, xK_k), spawn "xscreensaver-command -activate")
+	, ((modm .|. altMask, xK_h), spawn "terminator -e htop")
+        , ((modm .|. altMask, xK_m), spawn "terminator -e cmus")
+        , ((modm .|. altMask, xK_semicolon), spawn "firefox")
+        , ((modm .|. altMask, xK_p), spawn "pavucontrol")
 
         -- resizing tall
         , ((modm, xK_a), sendMessage MirrorShrink)

@@ -25,3 +25,10 @@ export PS1="\[${BOLD}${BLUE1}\]\h:\[$CYAN\]\w\[$BASE0\]${RESET}\$ "
 LS_COLORS=$LSCOLORS:'di=1;38;5;38'
 export LS_COLORS
 alias ls='ls --color=auto'
+
+export PATH="/home/namo/anaconda2/bin:/usr/bin:/usr/sbin:/usr/local/bin:/sbin:/bin:/home/namo/.local/bin"
+
+#complete -cf sudo man which systemctl time ssh rsync
+if [ -f /etc/bash_completion ]; then
+	. /etc/bash_completion
+fi

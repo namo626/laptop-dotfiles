@@ -9,6 +9,7 @@ udiskie --tray &
 ~/.dropbox-dist/dropboxd &
 megasync &
 stalonetray &
+xscreensaver &
 xss-lock -- slock &
 feh --bg-scale ~/Pictures/sky.jpg &
 xset b off &

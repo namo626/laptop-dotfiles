@@ -29,10 +29,6 @@
  '(fci-rule-color "#073642")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(frame-background-mode (quote dark))
- '(haskell-hoogle-command nil)
- '(haskell-interactive-popup-errors nil)
- '(haskell-process-path-ghci "stack")
- '(haskell-process-type (quote cabal-repl))
  '(highlight-indent-guides-auto-enabled nil)
  '(highlight-symbol-colors
    (quote
@@ -146,35 +142,12 @@
 ;;(define-key evil-normal-state-map "\C-r" 'undo-tree-redo)
 
 
-;;haskell-setup
-(require 'haskell-mode)
-(require 'haskell-interactive-mode)
-(require 'haskell-process)
-;;(add-hook 'haskell-mode-hook 'intero-mode)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-;;(eval-after-load 'haskell-mode
-;;  '(define-key interactive-haskell-mode-map (kbd "C-c C-c") 'ghc-toggle-check-command))
 
 ;;keybindings
-(define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
-(define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
-(define-key haskell-mode-map (kbd "<f3>") 'ghc-display-errors)
-;;(define-key haskell-mode-map (kbd "M-.") 'haskell-mode-jump-to-def)
-
-(let ((my-stack-path (expand-file-name "/var/namo/.local/bin")))
-  (setenv "PATH" (concat my-stack-path ":" (getenv "PATH")))
-  (add-to-list 'exec-path my-stack-path))
-;; (autoload 'ghc-init "ghc" nil t)
-;; (autoload 'ghc-debug "ghc" nil t)
-;;(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
-(setq haskell-process-type 'stack-ghci)
-(setq haskell-process-path-ghci "stack")
-;;(add-hook 'haskell-mode-hook #'hindent-mode)
+(intero-global-mode 1)
 
 ;;autocompletion
 (require 'company)
-;;(add-hook 'haskell-mode-hook 'company-mode)
-(add-to-list 'company-backends 'company-ghc)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'c-mode-common-hook 'company-mode)
 
@@ -209,6 +182,9 @@
 (global-set-key (kbd "<f9>") (kbd "C-u - 3 C-x ^"))
 (global-set-key (kbd "<f8>") (kbd "C-- - 3 C-x ^"))
 (global-set-key (kbd "M-g") 'magit-status)
+(global-set-key (kbd "M-a") 'align-regexp)
+(global-set-key (kbd "M-[") (kbd "C-u - 3 C-x ^"))
+(global-set-key (kbd "M-]") (kbd "C-- - 3 C-x ^"))
 
 ;;global settings
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -382,7 +358,7 @@
 (load-theme 'solarized-light t)
 
 ;; Fonts
-(set-face-attribute 'default nil :font "Source Code Pro for Powerline-13")
+(set-face-attribute 'default nil :font "Droid Sans Mono for Powerline-13")
 
 (global-auto-revert-mode t)
 (custom-set-faces
