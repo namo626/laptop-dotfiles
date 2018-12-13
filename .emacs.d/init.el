@@ -76,11 +76,11 @@
  '(org-tags-column 90)
  '(package-selected-packages
    (quote
-    (company-jedi company-anaconda anaconda-mode solarized-theme vimish-fold plan9-theme ein company-auctex auto-complete-auctex sunburn-theme apropospriate-theme auto-complete matlab-mode elpy sicp racket-mode auctex slime intero magit company-ghc hindent ghc haskell-mode pdf-tools color-theme-sanityinc-tomorrow gruvbox-theme color-theme-sanityinc-solarized hc-zenburn-theme zenburn-theme linum-relative org-edna)))
+    (markdown-mode company-jedi company-anaconda anaconda-mode solarized-theme vimish-fold plan9-theme ein company-auctex auto-complete-auctex sunburn-theme apropospriate-theme auto-complete matlab-mode elpy sicp racket-mode auctex slime intero magit company-ghc hindent ghc haskell-mode pdf-tools color-theme-sanityinc-tomorrow gruvbox-theme color-theme-sanityinc-solarized hc-zenburn-theme zenburn-theme linum-relative org-edna)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
- '(python-shell-interpreter "/home/namo/anaconda2/bin/ipython")
+ '(python-shell-interpreter "/home/namo/anaconda2/bin/ipython" t)
  '(server-mode t)
  '(show-paren-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#839496" 0.2))
